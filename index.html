@@ -1,0 +1,61 @@
+<!doctype>
+<html>
+	<head>
+		<title>Cookie Banner Beispiel</title>
+		<meta charset="utf-8">
+		<style type="text/css">
+			.cookie-banner {
+				position: fixed;
+				bottom: -200px;
+				left: 0;
+				right: 0;
+				background-color: yellow;
+				padding: 20px;
+				transition: bottom 1s;
+			}
+			.sichtbar {
+				bottom: 0;
+			}
+		</style>
+	</head>
+
+	<body>
+
+		<section class="cookie-banner">
+			<p>Diese Website verwendet Cookies.</p>
+			<p>
+				<button type="button" id="akzeptieren-button">Akzeptieren</button>
+			</p>
+		</section>
+	</body>
+	<script type="text/javascript">
+		// Wir schauen, ob im LocalStorage ein Wert gespeicher ist
+		const cookieBannerAkzeptiert = localStorage.getItem( 'banner-geklickt' );
+		// Referenz auf den Cookie-Banner
+		const cookieBanner = document.querySelector( '.cookie-banner' );
+
+		// Steht da was drin?
+		if ( ! cookieBannerAkzeptiert ) {
+			// Nein! Wir müssen den Cookie-Banner zeigen
+			// Wir fügen dem Cookie-Banner eine weitere CSS-Klasse hinzu
+			cookieBanner.classList.add( 'sichtbar' );
+		}
+
+		// Funktion, die auf dem Button bei einem Klick ausgeführt werden soll
+		function akzeptieren() {
+			// Cookie-Banner verstecken
+			cookieBanner.classList.remove( 'sichtbar' );
+			// Wir merken uns, dass der Banner weggeklickt wurde
+			localStorage.setItem( 'banner-geklickt', 'ja' );
+		}
+
+		// Der Button soll diese Funktion bei einem Klick ausführen
+		const okButton = document.querySelector( '#akzeptieren-button' );
+		// Die Akzeptieren-Funktion als Callback beim Klick angeben
+		okButton.addEventListener( 'click', akzeptieren );
+
+		console.log( 'YEAH!' );
+
+
+	</script>
+</html>
